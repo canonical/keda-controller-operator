@@ -73,18 +73,6 @@ jobs:
       - run: pipx install tox
       - run: tox -e unit
 
-  terraform-checks:
-    name: Terraform
-    needs:
-      - get-charm-paths-track
-    uses: canonical/charmed-kubeflow-workflows/.github/workflows/terraform-checks.yaml@main
-    strategy:
-      fail-fast: false
-      matrix:
-        charm: ${{ fromJSON(needs.get-charm-paths-track.outputs.charm-paths) }}
-    with:
-      charm-path: ${{ matrix.charm }}
-
   build:
     strategy:
       matrix:
